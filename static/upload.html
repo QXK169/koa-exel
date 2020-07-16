@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>上传exel</title>
+  <style>
+    .table-data {
+      margin-top: 10px;
+
+    }
+  </style>
+</head>
+
+<body>
+  <!-- <h2>上传表格</h2> -->
+  <div>
+    <input type="file" id='file'>
+    <div class='table-data'>
+      <table>
+        <caption id='title'></caption>
+        <thead>
+          <tr id='thead'>
+
+          </tr>
+        </thead>
+        <tbody id='tbody'></tbody>
+      </table>
+    </div>
+  </div>
+  <script>
+    const fileUploader = document.getElementById('file');
+    const title = document.getElementById('title');
+
+    const thead = document.getElementById('thead');
+    const tbody = document.getElementById('tbody');
+    fileUploader.onchange = function (event) {
+      let [file] = event.target.files;
+      const formData = new FormData();
+      formData.append('file', file);
+      fetch('/api/app/upload-exel', {
+        method: "post",
+        body: formData
+      }).then(response => response.json())
+        .then(res => {
+          const TableData = res.data;
+          document.getElementById('title').innerText = TableData['titel'][0];
+          let TableHead = TableData.head;
+          let TableString = ''
+          for (let i = 0; i < TableHead.length; i++) {
+            TableString += `<th>${TableHead[i]}</th>`
+          }
+          thead.innerHTML = TableString;
+          let TableBody = TableData.data;
+          let TableBodyString = [];
+          for (let i = 0; i < TableBody.length; i++) {
+            let tr = document.createElement('tr');
+            for (let j = 0; j < TableBody[i].length; j++) {
+              let td = document.createElement('td');
+              td.innerText = TableBody[i][j]
+              tr.appendChild(td);
+            }
+            tbody.append(tr);
+          }
+          console.log(TableBodyString);
+          TableBody.innerHTML = TableBodyString;
+        })
+    }
+
+  </script>
+</body>
+
+</html>

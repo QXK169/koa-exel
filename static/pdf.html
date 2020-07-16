@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>pdf快速预览</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/pdf.js/2.4.456/pdf.min.js"></script>
+  <style>
+    .download {}
+
+    .content {
+      border: none;
+      height: 100px;
+      overflow-y: auto;
+    }
+
+    .content:focus {
+      border: 1px solid #999;
+      outline: none
+    }
+
+    textarea {
+      outline: none;
+    }
+  </style>
+</head>
+
+<body>
+  <p contenteditable="true" class='content'>请输入密码</p>
+  <textarea name="" id="" cols="10" rows="10">请输入密码请输入密码</textarea>
+  <a download="test.pdf" class='download'
+    href="https://uploadeqrcode.oss-cn-beijing.aliyuncs.com/Uploads/file/1558926118154.png?Fresponse-content-disposition%3Dattachment%3Bfilename%3D%E6%96%B0%E7%AA%81%E7%A0%B4.png">下载</a>
+  <canvas id="the-canvas"></canvas>
+  <script>
+    // window.onload = function () {
+    //   console.log(PDFJS);
+    // };
+    // const url = 'http://localhost:3000/test.pdf';
+    // const loadingTask = PDFJS.getDocument(url);
+  </script>
+  <script type="module" src="./js/index.js"></script>
+  <script>
+
+  </script>
+</body>
+
+</html>
